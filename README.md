@@ -1,68 +1,62 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este projeto foi solicitado pela Dialog.ci como parte do processo de seleção de recursos humanos.
 
-## Available Scripts
+Visto a demanda de desenvolvimento de uma aplicação PWA utilizando React e consumindo informações de servidor GraphQL, defini como arquitetura mínima necessária:
 
-In the project directory, you can run:
+## Front-end
+React + Relay + Service Worker + IndexedDB
 
-### `yarn start`
+## Back-end
+Node.Js + Express + GraphQL.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Inicialização do projeto de Back-end
+O servidor de Back-end deve ser inicializado com o comando:
+`nodejs index.js`
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Este processo irá inicializar na porta 4000.
 
-### `yarn test`
+## Inicialização do projeto de Front-end
+O servidor de Front-end pode ser inicializado com o comando:
+`yarn start`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Este processo irá inicializar na porta 3000.
 
-### `yarn build`
+Contudo para instalação e validação da funcionalidade de PWA é necessário efetuar o build do projeto e servir o projeto finalizado em outra porta.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Comando para compilar o projeto:
+`yarn build`
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Comando para instalar a biblioteca 'serve' que permite executar o projeto compilado.
+`yarn global add serve`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Comando para inicializar o projeto compilado
+`serve -s build`
 
-### `yarn eject`
+Esse comando deve levantar o projeto compilado na porta 5000
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Validação PWA
+O Google Chrome bloqueia a instalação de aplicações PWA fora de um ambiente de segurança em HTTPS. Contudo, é possível efetuar a validação no Localhost, sendo assim é necessário acessar a página e instalar no computador.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+`http://localhost:5000/`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Após essa instalação é possível remover a rede do computador e o aplicativo continua funcionando offline.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+A estrutura inicial do projeto foi criada utilizando a biblioteca create-react-app.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Observações importantes
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Existe uma divergência entre o modelo de dados proposto no desafio e modelo oferecido. O atributo que representa o NOME do usuário deveria ser dividido em NOME (first) e SOBRENOME (last), contudo a base oferecida apresenta o atributo name como representação para o NOME e SOBRENOME. Não sendo um problema crítico dei continuidade ao desenvolvimento do projeto.
 
-### Code Splitting
+Nas filtragens efetuadas no backend e frontend foram efetuadas utilizando a construção de objeto RegEX e validação pelo método test().
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Foi criado um middleware para armazenamento do log das requisições enviadas. Inicial essas requisições está sendo exibidas na saída do processo de execução, contudo pode ser adaptado para armazenamento em arquivo ou banco de dados.
 
-### Analyzing the Bundle Size
+O Mockup fornecido foi utilizado para construção das telas do aplicativo. Contudo, em aplicações Mobile, nesse caso PWA, onde não é exibida a barra de navegação do browser, é necessário um botão físico de retorno. Visto que não existia no projeto esse botão a funcionalidade foi incluída no evento onClick da logo do projeto "MySocial"
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+Foi encontrada um problema de consistência nos dados da plataforma. Pois a lista de usuários possui 45 item, contudo os usuários na listagem de amigos (atributo friends) não fazem parte desta lista. Logo a funcionalidade de clique e navegação para o perfil ficou aplicada apenas na listagem da tela "UsersPage", visto que o clique para acesso do perfil dos amigos gera erro de dado não existente.
 
-### Making a Progressive Web App
+No Mockup da tela de visualização do perfil do usuário foi mantido o campo filter ao lado da logo.  Contudo não existe mais lista de usuários para serem filtradas e a posição do campo pode confundir o usuário na navegação. De qualquer forma, foi implementado na posição indicada com a funcionalidade de filtragem da listagem de amigos.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Todas as telas utilizam os componentes estruturais personalizados criados no projeto, Container, Row e Grid. Os quais foram criados de forma responsiva.
 
-### Advanced Configuration
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
